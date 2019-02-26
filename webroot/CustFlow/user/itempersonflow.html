@@ -1,0 +1,241 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>People Flow Statistics</title>
+
+    <link rel="stylesheet" href="../css/layout.css" type="text/css"
+        media="screen" />
+    <link rel="stylesheet" href="../css/style.css" type="text/css"
+        media="screen" />
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript"
+        src="../js/My97DatePicker/WdatePicker.js">
+    </script>
+    <script src="../js/jquery/hideshow.js" type="text/javascript">
+    </script>
+    <script src="../js/jquery/jquery.tablesorter.min.js"
+        type="text/javascript">
+    </script>
+    <script type="text/javascript"
+        src="../js/jquery/jquery.equalHeight.js">
+    </script>
+    <script type="text/javascript" src="../js/menu.control.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.util.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/highcharts.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/exporting.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/export-excel.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.page.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.table.js">
+    </script>
+    <script type="text/javascript" src="../js/login.js">
+    </script>
+    <script type="text/javascript" src="../js/select.load.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.chart.js">
+    </script>
+	
+    <script type="text/javascript"
+        src="../js/user.project.personflow.chart.js">
+    </script>
+	<script type="text/javascript" src="../js/areacheckbox.load.js">
+	</script>
+    
+    <style>
+        .
+
+    </style>
+
+
+    
+
+
+</head>
+
+
+<body>
+
+    <header id="header">
+        <hgroup>
+            <h1 class="site_title">
+				<div style="width:100%;height:100%;text-align:center">
+					<img id="logo" style="width:80%;height:100%;" src="" onerror="javascript:this.src='../images/logo/logo.png'"/>
+				</div>
+			</h1>
+            <h2 class="section_title">People Flow Statistics System
+            </h2>
+            <div class="btn_view_site">
+                <a onclick="LogOut_AJAX();">Exit</a>
+            </div>
+        </hgroup>
+    </header>
+    <!-- end of header bar -->
+
+    <section id="secondary_bar">
+        <div class="user">
+            <p>
+                <label>
+                    <a href="#" id="loginusername"></a>
+                </label>
+            </p>
+            <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+        </div>
+        <div class="breadcrumbs_container">
+            <article class="breadcrumbs">
+                <a onclick='javascript:location.replace("index.html")'>Home Page</a>
+                <div class="breadcrumb_divider"></div>
+                <a class="current">People Flow Statistics</a>
+            </article>
+        </div>
+    </section>
+    <!-- end of secondary bar -->
+
+    <aside id="sidebar" class="column" >
+        <form class="quick_search">
+            <input type="text" value="Quick search"
+                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+        </form>
+        <hr />
+        <h3>
+			People Flow Statistics
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>People Flow Statistics</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>In & Out Statistics</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>Stay Time Statistics</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>Stay Number Statistics</a>
+			</li>
+			<li class="icn_virtualequ">
+				<a onclick='javascript:location.replace("passangerflowmanage.html")'>Entrance Management</a>
+			</li>
+		</ul>
+		<h3>
+			Customer Information
+		</h3>
+            <ul class="toggle">			
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>Personal Information</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>Equipment Information</a>
+                </li>
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("usersalesinfo.html")'>Sales Information</a>
+                </li>
+            </ul>
+        <footer>
+            <hr />
+        </footer>
+    </aside>
+    <!-- end of sidebar -->
+
+    <section id="main" class="column">
+
+
+        <article class="module width_full">
+            <header>
+                <h3 class="tabs_involved">People Flow Statistics
+                </h3>
+            </header>
+
+            <div class="tab_container bulk-actions-txt" id="tab2">
+                <div class="bulk-actions-time" style="height: 40px; width: 94%; margin: auto;">
+                    <div>
+                        <span>Start Date:
+                            <input
+                                name="startTime" id="startTime" type="text"
+                                onfocus="WdatePicker({lang:'en',readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'endTime\',{M:-12,y:-100})}',maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})"
+                                style="width: 100px;" readonly="readonly" />
+                        </span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Date:
+                            <input
+                                name="endTime" id="endTime" type="text"
+                                onfocus="WdatePicker({lang:'en',readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}',maxDate:'#F{\'%y-%M-%d\'}'})"
+                                style="width: 100px;" readonly="readonly" />
+                        </span></br>
+                        </br>
+                        <span class="timetext timerange" style="margin-left:0px;">Sales：<select name="deviceSales" id="deviceSales" class="selectwidth" style="width:210px;">
+                            <option value="-1">--Please Select The Entrance--
+                            </option>
+                        </select></span>
+						<span class="timetext timerange" >&nbsp;&nbsp;Display By：<select name="Methods" id="Methods" class="selectwidth" style="width:70px;">
+                            <option value="day" selected="selected">days</option>
+							<option value="month" >months</option>
+							<option value="year" >years</option>
+                        </select></span>
+                    </div>
+                </div></br>
+				</br>
+                <div id="selectArea" style="width: 100%; margin: 0 auto; margin-left:39px; height: 40px; line-height:40px;">
+                    <div id="selectList" style="width:80%;height:100%;float:left;overflow:hidden;">Entrance：</div>
+                    <div style="width:100px;max-width:20%; height:100%;float:left;"><button id="BtnMoreArea" style="width:80px;height:30px;color:#fff;border:none;background-color:#0ff;font-size:16px;display:none;">More</button></div>
+
+                </div>
+                <!-- <div style="margin:0 auto;width:100px;height:100px;"><button id="SubMitArea" style="margin:0 auto;width:80px;height:30px;color:#fff;border:none;background-color:#0ff;font-size:16px;">提交</button></div> -->
+
+                <div style="clear: left; width: 96%; margin-left:28px; border-bottom: 1px solid #eeeeee;">
+                    <p>
+                        &nbsp;Chart：
+                    <button class="btn" id="personChart" theme="personflow">People Flow Statistics</button>
+                        <button class="btn" theme="andsalesrate">People Flow And Average Sales</button>
+                        <button class="btn" theme="andsaleaverage">People Flow And Rate Of Purchase</button>
+                        
+
+
+                     <div id="detilbox" class="box">
+                          <h1><button id="detilbtn" class="btn" theme="detilbtn">Detailed Info</button></h1>
+                          <div class="text" >
+                               <div id="detil"></div>
+                          </div>
+                     </div>
+                     <br />
+                    </p>
+                </div>
+               
+                <div class="clear"></div>
+                <!--   图表         -->
+
+                <div id="flow_Shadow" class="shadow" >
+                    <img src="../images/load.gif" />
+                </div>
+                <!-- table表的load遮罩 -->
+                <div id="flow_Error" class="error">
+                    <img src="../images/error.png" />
+                </div>
+                <div id="flowcontainer" class="chartlist">
+                </div>
+            </div>
+            <!-- end of .tab_container -->
+
+        </article>
+        <!-- end of content manager article -->
+
+        <div class="clear"></div>
+
+        <div class="spacer"></div>
+    </section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Customer Information</title>
+
+    <link rel="stylesheet" href="../css/layout.css" type="text/css"
+        media="screen" />
+    <link rel="stylesheet" href="../css/style.css" type="text/css"
+        media="screen" />
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript"> </script>
+<script src="../js/jquery/hideshow.js" type="text/javascript"> </script>
+<script src="../js/jquery/jquery.tablesorter.min.js" type="text/javascript"> </script>
+<script type="text/javascript" src="../js/jquery/jquery.equalHeight.js"> </script>
+<script type="text/javascript" src="../js/menu.control.js"> </script>
+<script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"> </script>
+<script type="text/javascript" src="../js/ope.util.js"> </script>
+<script type="text/javascript" src="../js/ope.page.js"> </script>
+<script type="text/javascript" src="../js/ope.table.js"> </script>
+<script type="text/javascript" src="../js/select.load.js"> </script>
+<script type="text/javascript" src="../js/login.js"> </script>
+<script type="text/javascript" src="../js/admin.modify.js"> </script>
+</head>
+
+
+<body>
+    <div id="tempdiv" class="tempdiv"></div>
+    <header id="header">
+        <hgroup>
+            <h1 class="site_title">
+                <!-- <img src="../images/logo.png" /> -->
+            </h1>
+            <h2 class="section_title">
+                People Flow Statistics System
+		</h2>
+            <div class="btn_view_site">
+                <a onclick="LogOut_AJAX();">Exit</a>
+            </div>
+        </hgroup>
+    </header>
+    <!-- end of header bar -->
+
+    <section id="secondary_bar">
+        <div class="user">
+            <p>
+                <a href="#" id="loginusername"></a>
+            </p>
+            <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+        </div>
+        <div class="breadcrumbs_container">
+            <article class="breadcrumbs">
+                <a onclick='javascript:location.replace("userinfo.html")'>Customer information</a>
+                <div class="breadcrumb_divider"></div>
+                <a class="current">Personal Information</a>
+            </article>
+        </div>
+    </section>
+    <!-- end of secondary bar -->
+
+    <aside id="sidebar" class="column width_quarter">
+        <form class="quick_search">
+            <input type="text" value="Quick search"
+                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+        </form>
+        <hr />
+       <h3>
+			People Flow Statistics
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>People Flow Statistics</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>In & Out Statistics</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>Stay Time Statistics</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>Stay Number Statistics</a>
+			</li>  
+			<li class="icn_virtualequ">
+				<a onclick='javascript:location.replace("passangerflowmanage.html")'>Entrance Management</a>
+			</li>
+		</ul>
+		
+		<h3>
+			Customer Information
+		</h3>
+            <ul class="toggle">
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("iteminfo.html")'>Project Information</a>
+                </li>
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>Customer Information</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>Equipment Information</a>
+                </li>
+				<li class="icn_video">
+                    <a onclick='javascript:location.replace("personal.html")'>Personal Information</a>
+                </li>
+            </ul>
+        <footer>
+            <hr />
+            <p>
+                
+            </p>
+        </footer>
+    </aside>
+    <!-- end of sidebar -->
+
+    <section id="main" class="column">
+
+
+        <article class="module width_full" id="listarticle">
+            <header>
+                <h3 class="tabs_involved">Personal Information</h3>
+
+            </header>
+            <div class="tab_content bulk-actions-txt">
+			<div id="CustDetailTable_Shadow" class="shadow">
+				<img src="../images/load.gif" />
+			</div>
+			<div id="CustDetailTable_Error" class="error">
+				<img src="../images/error.png" />
+			</div>&nbsp
+			<table id="CustDetailTable" class="tablesorter" cellspacing="0">
+				<colgroup>
+					<col class="tdwidth5"></col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="text-right">
+							Username：
+						</td>
+						<td>
+							<input name="AdminName" id="AdminName"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" style="font-weight:bold;" value="admin" readonly="readonly" disabled/>
+						</td>
+					</tr>
+                    <tr>
+                        <td class="text-right">Password：
+                        </td>
+                        <td>
+                            <input name="AdminPwd" id="AdminPwd" class="text-input inputsize2"
+                                type="password" maxlength="50" class="input_txt_col" value="******"  disabled/>
+							<div class="bulk-actions-btn align-right">
+                                <a id="Cancel" class="alt_btn" onclick="Cancel();">Cancel</a>
+                            </div>
+                            <div class="bulk-actions-btn align-right">
+                                <a id="BtnModify" class="alt_btn" onclick="ModifyPwd();">Modify Password</a>
+                            </div>
+                        </td>
+                    </tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							New Password：
+
+						</td>
+						<td>
+							<input name="newAdminPwd" id="newAdminPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							Confirm Password：
+
+						</td>
+						<td>
+
+							<input name="confirmAdminPwd" id="confirmAdminPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+           
+
+        </article>
+        <!-- end of content manager article -->
+
+        
+
+        <div class="clear"></div>
+
+        <div class="spacer"></div>
+    </section>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,40 @@
+========= Done =============
+[X] 项目设备设定
+[X] 虚拟设备关联
+[X] 设备状态控制
+[X] 设备离线超时判定时间: 现在
+[X] 中文Unicode，utf-8 使用规范:   get_server_cfg返回了UNICODE
+[X] project isusable 不对应项目的isUsable 有0，1，2应该是组合状态信息
+[X] 设备返回状态: state 取值组合
+[X] 添加重复名称判断无: 同项目内名称不能相同
+[X] 虚拟设备设备数量: 已经注册，使用设备
+[X] 项目管理员显示权限控制，禁用项目不能登录，项目管理员只能看到自己项目设备
+[X] 修改项目用户密码
+
+
+========= Plan =============
+[ ] 项目状态不对
+[ ] ssh连接
+
+[ ] 年龄设备添加默认issign, isusable属性
+[ ] 登录：使用SHA1密码验证, 现在 GET传递明文，够可以的
+[ ] doDB 每个请求都是短连接，需要调整为每个进程的长连接
+[ ] CustFlow/js/login.js->LogOut_AJAX() -> 
+            //location.replace("login.html");
+            window.location.href = "/CustFlow/login.html";
+[ ] GetProjectDeviceServlet 未知数据
+[ ] 分页显示数据问题
+[ ] DeviceConnectExist SSH 反向连接?
+[ ] GetDeviceType ,AdminDeviceList 有什么差别？
+[ ] 设备不能删除?
+[ ] Web页面加入git控制
+[ ] uuid.uuid1(), uuid.uuid1() 连续使用，返回值一样
+[ ] 密码修改明文，无原始密码判断
+[ ] 项目删除
+
+##
+性别有时间范围: 8:00~23:00
+
+========= Draft =============
+1. device_cust device_age 应该是一个: 预留未来分开
+2. 平均停留时间如果算出来是负数，暂时abs()

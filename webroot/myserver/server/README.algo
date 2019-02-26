@@ -1,0 +1,80 @@
+
+统计算法说明:
+
+OK 1. 项目或者设备人流量统计
+    数据来源  : 指定日期范围内, 选定项目或者设备对应的所有dataguid设备人员进出数据
+    对应数据库: DB:custcount, inoutnum.innum - 进入人数, inoutnum.outnum - 出去人数, inoutnum.curtime - 记录时间
+    图表展示  : X轴-天(对应日期)，Y轴-柱状图(每日人数)
+    算法说明  : 每日人数=所选所有dataguid设备当日进出人数总和/2
+    对应SQL   : select (sum(innum)+sum(outnum))/2 as inout_aver, DATE_FORMAT(curtime, '%Y-%m-%d') as day from inoutnum where dataguid in ('DATAGUID','DATAGUID') and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' group by day
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据
+
+FAILED 2. 项目或者设备平均停留时间统计
+    数据来源  : 指定日期范围内, 选定项目或者设备对应的所有dataguid设备人员进出数据
+                基于指定时间间隔统计总数, 可以选择5分钟，10分钟，15分钟，30分钟，1小时
+    对应数据库: DB:custcount, inoutnum.innum - 进入人数, inoutnum.outnum - 出去人数, inoutnum.curtime - 记录时间
+    图表展示  : X轴-(天)对应日期，Y轴-柱状图(平均停留时间 单位:分钟)
+    算法说明  : 平均停留时间 = ((时间间隔内停留人数 X 时间间隔单位)之和)/总进出人数
+                时间间隔内停留人数 = 时间间隔内，进入人数之和-出去人数之和(负数记0)
+                总进出人数 = (进入人数之和+出去人数之和)/2
+                ----------------------------------------------------------------------
+                1. 有效数据选择： 
+                    1) 从开始有in人开始计算，开始out得数据忽略
+                    2) 记录全天总得in人数in_total(innum>0)和out人数out_total(outnum>0)， 有效人数取 actual_person_count = min(in_total, out_total)
+                    3) 如果in_total > out_total:  忽略开始多得进入人数
+                    4) 如果in_total < out_total:  忽略结束多得出去人数
+                2. 算法
+                    有效数据内
+                    ([outnum*unix_timestamp(curtime)]之和 - ([innum*unix_timestamp(curtime)]之和) / actual_person_count
+                    2013-12-02: abs(平均出去人员时间-平均进入人员时间)
+                    
+    对应SQL   : select innum, outnum, DATE_FORMAT(curtime, '%Y-%m-%d %T') as time from inoutnum where dataguid in ('DATAGUID','DATAGUID') ) and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' order by curtime;
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据
+
+OK 3. 项目或者设备详细进出人数统计
+    数据来源  : 指定日期范围内, 选定项目或者设备对应的所有dataguid设备人员进出数据
+                基于指定时间间隔统计总数, 可以选择5分钟，10分钟，15分钟，30分钟，1小时
+    对应数据库: DB:custcount, inoutnum.innum - 进入人数, inoutnum.outnum - 出去人数, inoutnum.curtime - 记录时间
+    图表展示  : X轴-一天24小时时间轴，Y轴-折线图(进入人数+出去人数)
+    算法说明  : 进入人数 = 时间间隔内所有dataguid设备进入人数总和
+                出去人数 = 时间间隔内所有dataguid设备出去人数总和
+    对应SQL   : select innum, outnum, DATE_FORMAT(curtime, '%Y-%m-%d %T') as time from inoutnum where dataguid in ('DATAGUID','DATAGUID') ) and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' order by curtime;
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据
+
+FAILED 4. 项目或者设备详细停留人数统计
+    数据来源  : 指定日期范围内, 选定项目或者设备对应的所有dataguid设备人员进出数据
+                基于指定时间间隔点统计停留人数, 可以选择5分钟，10分钟，15分钟，30分钟，1小时
+    对应数据库: DB:custcount, inoutnum.innum - 进入人数, inoutnum.outnum - 出去人数, inoutnum.curtime - 记录时间
+    图表展示  : X轴-一天24小时时间轴，Y轴-折线图(停留人数)
+    算法说明  : 停留人数 = 每个时间间隔结束时候，每天所有设备进入人数和-每天所有设备出去人数和(负数记0)
+                按照每天进出人数，等比例调整人数，原则是将大得数据缩小后，进出一致后计算
+                包括-1， 计算
+    对应SQL   : select innum, outnum, DATE_FORMAT(curtime, '%Y-%m-%d') as day, DATE_FORMAT(curtime, '%T') as time from inoutnum where dataguid in ('DATAGUID','DATAGUID') ) and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' order by curtime;
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据
+
+OK 5. 设备年龄分布统计
+    数据来源  : 指定日期范围内, 选定设备人员年龄统计信息
+                基于指定时间间隔点内统计年龄区间人数总和, 可以选择5分钟，10分钟，15分钟，30分钟，1小时
+    对应数据库: DB:custcount, ageattr.age - 年龄中间值, ageattr.curtime - 记录时间
+    图表展示  : X轴-一天24小时时间轴，Y轴-折线图(多个年龄段统计人数)
+    算法说明  : 年龄段统计人数 = 每天时间间隔内，满足年龄段范围内的人数总和
+    对应SQL   : select DATE_FORMAT(curtime, '%Y-%m-%d %T') as time, age from ageattr where dataguid='DATAGUID' and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' and age is not NULL order by curtime;
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据
+
+OK 6. 设备性别分布统计
+    数据来源  : 指定日期范围内, 选定设备人员年龄统计信息
+                基于指定时间间隔点内统计性别人数总和, 可以选择5分钟，10分钟，15分钟，30分钟，1小时
+    对应数据库: DB:custcount, ageattr.sex - 性别 (0表示女，1表示男), ageattr.curtime - 记录时间
+    图表展示  : X轴-一天24小时时间轴，Y轴-柱状图(男+女),  总数饼图(男总数+女总数)
+    算法说明  : 男 = 每天时间间隔内，男性人数总和
+                女 = 每天时间间隔内，女性人数总和
+                男总数 = 每天男性人数总和
+                女总数 = 每天女性人数总和
+    对应SQL   : select DATE_FORMAT(curtime, '%Y-%m-%d %T') as time, sex from ageattr where dataguid='DATAGUID' and curtime>'START_DATE 00:00:00' and curtime<'END_DATE 23:59:59' order by curtime;
+    变量说明  : DATAGUID-设备dataguid, START_DATE-开始日期, END_DATA-结束日期
+    数据处理  : 结果导入Python数据结构后，处理生成所需数据

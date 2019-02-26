@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+#cd /leo/work/rayeye/rayeye002/rayeye002/server
+cd /alidata1/web/server
+
+
+## restart web
+
+PIDFILE=/var/run/lighttpd_webui8081.pid
+
+if [ -f $PIDFILE ]; then
+    kill -9 `cat $PIDFILE `
+
+fi
+
+#lighttpd -f /etc/lighttpd/lighttpd_8081.conf 
+
+/usr/sbin/lighttpd -f /alidata1/web/conf/lighttpd_8081.conf
+
+
+
+## restart scgi
+PROG=srv_webui1.py
+
+ID=`ps aux|grep $PROG | grep -v grep | awk '{print $2}' | xargs`
+
+[ "_$ID" != "_" ] && echo "kill $ID" && kill $ID
+
+./$PROG  1 1 1  1
+
+
+exit 0

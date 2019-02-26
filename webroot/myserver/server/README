@@ -1,0 +1,204 @@
+
+server/
+    对应数据请求，使用JSON返回数据
+
+    项目是手工建立的虚设备对应查询
+
+1. 项目人数统计
+  1) 人流量表查询:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/InOutFlowCountServlet?startDate=2013-10-01&endDate=2013-10-28&deviceGuid=21F8A444-93D2-4158-BEC4-3A5951B3BA1F&isvirtual=1&random=d9e22eef-79a9-5167-20de-75bbc4df10f4&Action=get
+    返回: {"column":[0,0,0,0,0,26,0,0,8,8,0,0,0,0,0,0,85,0,0,0,0,0,0,0,0,0,0,0],"categories":["10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18","10.19","10.20","10.21","10.22","10.23","10.24","10.25","10.26","10.27","10.28"]}
+  2) 平均停留时间查询：
+    请求: http://127.0.0.1:8080/CustFlow/servlet/AverageStayTimeServlet?startDate=2013-10-01&endDate=2013-10-28&deviceGuid=21F8A444-93D2-4158-BEC4-3A5951B3BA1F&isvirtual=1&random=5305df0d-ebc3-5af1-0518-d322def64913&Action=get
+    返回: {"column":[0,0,0,0,0,491,0,0,53,12,0,0,0,0,0,0,90,0,0,0,0,0,0,0,0,0,0,0],"categories":["10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18","10.19","10.20","10.21","10.22","10.23","10.24","10.25","10.26","10.27","10.28"]}
+  3) 详细进出人数查询：
+    请求: http://127.0.0.1:8080/CustFlow/servlet/InOutCountChartServlet?startDate=2013-10-28&endDate=2013-10-28&deviceGuid=21F8A444-93D2-4158-BEC4-3A5951B3BA1F&isvirtual=1&random=5b71d0bf-693c-bbf4-ae48-8555c5a2efd7&Action=get
+    返回: {"outPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"inPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+  4) 详细停留人数查询:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/StayCountChartServlet?startDate=2013-10-28&endDate=2013-10-28&deviceGuid=21F8A444-93D2-4158-BEC4-3A5951B3BA1F&isvirtual=1&random=9bd5bbb9-5bd4-81d2-821e-a23bf4002e03&Action=get
+    返回: {"stayPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+  4.1) 请求项目设备信息
+    请求: http://127.0.0.1:8080/CustFlow/servlet/GetProjectDeviceServlet?proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&random=7a819427-573f-56e1-23e6-691d9e385dbe&Action=get
+    返回: {"guid":"21F8A444-93D2-4158-BEC4-3A5951B3BA1F"}
+    
+2. 设备人数统计：
+  5) 人流量表查询: 
+    请求: http://127.0.0.1:8080/CustFlow/servlet/InOutFlowCountServlet?startDate=2013-10-01&endDate=2013-10-28&deviceGuid=30b96c4a-728b-4e0b-9dba-fd97f0a6f3eb&isvirtual=0&random=e118cfd9-ce80-8afe-51f0-737074ed193f&Action=get
+    返回: {"column":[0,0,0,0,0,26,0,0,8,0,0,0,0,0,0,0,85,0,0,0,0,0,0,0,0,0,0,0],"categories":["10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18","10.19","10.20","10.21","10.22","10.23","10.24","10.25","10.26","10.27","10.28"]} 
+  6) 平均停留时间查询：
+    请求: http://127.0.0.1:8080/CustFlow/servlet/AverageStayTimeServlet?startDate=2013-10-01&endDate=2013-10-28&deviceGuid=F941DF13-BCEA-4442-A681-D897D3C9AAAB&isvirtual=1&random=202db5d1-ec2a-14b8-07b7-5c837be81578&Action=get        
+    返回: {"column":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"categories":["10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18","10.19","10.20","10.21","10.22","10.23","10.24","10.25","10.26","10.27","10.28"]}
+  7) 详细进出人数查询:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/InOutCountChartServlet?startDate=2013-10-28&endDate=2013-10-28&deviceGuid=F941DF13-BCEA-4442-A681-D897D3C9AAAB&isvirtual=1&random=56b275dd-efae-864d-aac9-5163cc36da12&Action=get
+    返回: {"outPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"inPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+  8) 详细停留人数查询:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/StayCountChartServlet?startDate=2013-10-28&endDate=2013-10-28&deviceGuid=F941DF13-BCEA-4442-A681-D897D3C9AAAB&isvirtual=1&random=67b13899-9cac-e56e-af84-7a2c7481d32f&Action=get
+    返回: {"stayPersonCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+
+3. 年龄性别统计 (暂无)
+3.1) 年龄分布表
+    请求: http://127.0.0.1:8081/CustFlow/servlet/AgeAttributeChartServlet?startDate=2013-11-18&endDate=2013-11-18&deviceGuid=dfaf2fd2-4e7d-4e33-a79d-717d6674c1e0&isvirtual=%00&random=05a6e060-1d5c-9f38-343b-f9e648a1027f&Action=get
+    返回: {"ageCount45":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount55":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount65":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount35":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount25":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount0":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"categories":0,"ageCount30":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount40":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"ageCount15":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+    JSON分解:
+    ageCount65 [0, 0, 0, 21 更多...]
+    ageCount45 [0, 0, 0, 21 更多...]
+    ageCount55 [0, 0, 0, 21 更多...]
+    ageCount40 [0, 0, 0, 21 更多...]
+    ageCount35 [0, 0, 0, 21 更多...]
+    ageCount30 [0, 0, 0, 21 更多...]
+    ageCount25 [0, 0, 0, 21 更多...]
+    ageCount15 [0, 0, 0, 21 更多...]
+    ageCount0 [0, 0, 0, 21 更多...]
+    categories 0
+3.2) 性别分布表
+    请求: http://127.0.0.1:8080/CustFlow/servlet/SexAttributeChartServlet?startDate=2013-11-18&endDate=2013-11-18&deviceGuid=30b96c4a-728b-4e0b-9dba-fd97f0a6f3eb&isvirtual=0&random=f41d4569-8fdd-5743-7e88-0efcb6d292dc&Action=get
+    返回: {"maleTotal":0,"maleCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"categories":8,"femaleTotal":0,"femaleCount":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+
+4.项目信息管理
+  9) 项目列表查询:
+    请求:
+    项目搜索: http://127.0.0.1:8080/CustFlow/servlet/ProjectListServlet?beginIndex=0&endIndex=10&random=d4b5ba53-4eb8-6848-0343-4901e9716606&Action=get
+    返回: {"itemCount":0,"projectList":[]}
+    {"itemCount":5,"projectList":[{"strProjectName":"test1","strGuid":"17BBB3C5-185A-40A6-98A9-2B11A758AB60","strTime":"2013-10-28 14:29:24","strProjectDescription":"test1项目描述1"},{"strProjectName":"林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林","strGuid":"CF4F46DF-2E1A-4BD9-B042-EAE629FCA7FA","strTime":"2013-09-29 17:19:40","strProjectDescription":"6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666699999999999999999999999999999999999"},{"strProjectName":"宝山万达","strGuid":"52767307-243F-4774-A1C8-4A307B31D4F3","strTime":"2013-09-29 17:12:44","strProjectDescription":"描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢"},{"strProjectName":"松江高科技园区","strGuid":"5A6D2D1B-6E84-4B83-9107-07D18D120D69","strTime":"2013-09-24 17:17:56","strProjectDescription":"8"},{"strProjectName":"五角场万达","strGuid":"8fcfe580-d63e-4a20-8ffd-32c89a3c7162","strTime":""}]}
+  10) 项目详细信息查询
+     请求: http://127.0.0.1:8080/CustFlow/servlet/ProDetailServlet?Guid=17BBB3C5-185A-40A6-98A9-2B11A758AB60&random=31ca07c1-3540-e16a-f475-69e57992d82a&Action=get
+     返回: {"responsiblePerson":"222","projectDetailInfo":"444","projectDescription":"333","projectName":"111","addTime":"2013-11-14 23:37:08"}
+  11) 增加，修改
+    请求: 
+       新增: http://127.0.0.1:8080/CustFlow/servlet/AddProjectServlet?guid=&projectName=test1&projectDescription=test1%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B0&addTime=&responsiblePerson=test1%E8%B4%9F%E8%B4%A3%E4%BA%BA&projectDetailInfo=test1%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF&random=b0459ed4-ae8f-f1af-a142-399d5baaa59c&Action=get
+       修改: http://127.0.0.1:8080/CustFlow/servlet/AddProjectServlet?guid=17BBB3C5-185A-40A6-98A9-2B11A758AB60&projectName=test1&projectDescription=test1%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B01&addTime=2013-10-28%2014:29:24&responsiblePerson=test1%E8%B4%9F%E8%B4%A3%E4%BA%BA&projectDetailInfo=test1%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF&random=af0cb93e-d588-f543-ded0-f79e3d03b6ff&Action=get
+    返回:SUCCESS
+  12) 删除
+    请求:
+    返回:
+  12.1) 获取项目列表清单 
+    请求: http://127.0.0.1:8081/CustFlow/servlet/GetProjectDeviceServlet?proguid=undefined&random=4170c240-236b-8887-bc55-8f5a706da4b1&Action=get
+          http://127.0.0.1:8080/CustFlow/servlet/GetProjectDeviceServlet?proguid=5A6D2D1B-6E84-4B83-9107-07D18D120D69&random=7f089796-e361-b655-e2b9-63135317e29d&Action=get
+    返回:
+
+  12.2) 改变项目状态
+    请求: http://127.0.0.1:8080/CustFlow/servlet/ChangeProjectStateServlet?Guid=4c5f14b2-4ed7-11e3-aa50-9c4e36c5898c&isUsable=false&random=eb4c1b0c-35b0-f9a7-da89-8a37c71a6c64&Action=get
+    返回: {"isUsable":"0"}
+
+    
+5. 设备信息管理
+  13) 设备信息-查询设备
+    请求: http://127.0.0.1:8080/CustFlow/servlet/AdminDeviceListServlet?beginIndex=0&endIndex=10&proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&random=397241d7-9134-1c3f-f65b-effe825e6472&Action=get
+    请求: http://127.0.0.1:8080/CustFlow/servlet/UserDeviceListServlet?beginIndex=0&endIndex=10&proguid=3E39AE3F-6F8B-405F-912F-B00CA444984F&random=28321e6a-6a83-726e-983f-b22131610e69&Action=get
+    返回: {"deviceList":[{"strGuid":"53a69fa0-90f5-41c0-ae84-d94eb8ec993e","strFromTable":"device_cust","strDeviceName":"测试6"},{"strDeviceDescription":"","strGuid":"e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95","strFromTable":"device_cust","strDeviceName":"真实测试2222222222222222222222222222"},{"strDeviceDescription":"8","strGuid":"97127AD7-196A-4266-A95A-13EB7F10A420","strFromTable":"device_cust","strDeviceName":"真实8"},{"strDeviceDescription":"6","strGuid":"28C20CE1-2E84-44BE-A4C4-3A56BA506E46","strFromTable":"device_cust","strDeviceName":"真实6"},{"strDeviceDescription":"99","strGuid":"E341ADA9-1C66-4596-922F-509C91EABB2C","strFromTable":"device_cust","strDeviceName":"真实99"},{"strDeviceDescription":"5555","strGuid":"a8aa92cf-9322-43d2-8372-6b7cdef3c4f4","strFromTable":"device_age","strDeviceName":"年龄测试1"},{"strDeviceDescription":"描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢描述什么2呢","strGuid":"dfaf2fd2-4e7d-4e33-a79d-717d6674c1e0","strFromTable":"device_cust","strDeviceName":"真实测试1"},{"strDeviceDescription":"这是骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技骏聿科技","strGuid":"0DAE73E3-FF43-4E74-A658-7449BD3455D5","strFromTable":"device_cust","strDeviceName":"真实测试7"}],"itemCount":8}
+    JSON: 
+        deviceList: [device]
+            device:
+                isSign false
+                strDeviceDescription "6" 
+                isUsable false
+                strGuid "55468A0B-23AA-4C54-9BE6-CB5211A9F114" 
+                state "0" 
+                strFromTable "device_cust"
+                strDeviceName "6"
+        itemCount: int
+  14) 设备信息-设备详细信息
+    请求: http://127.0.0.1:8080/CustFlow/servlet/DevDetailServlet?Guid=53a69fa0-90f5-41c0-ae84-d94eb8ec993e&FromTable=device_cust&random=2ee606df-3022-ef3a-d4c3-9128fe2c45ed&Action=get
+    返回: {"deviceName":"测试6","detailOwnProject":"8fcfe580-d63e-4a20-8ffd-32c89a3c7162","deviceUUID":"6","ownDeviceType":"device_cust","addTime":"2013-10-09 14:51:53"}
+  15) 设备信息-增加，修改
+    请求:
+      增加: http://127.0.0.1:8080/CustFlow/servlet/AddDeviceServlet?guid=&deviceName=aaa&ownDeviceType=device_cust&deviceUUID=aaaaaaaaaaaaa&deviceDescription=aaa%E8%AE%BE%E5%A4%87%E6%8F%8F%E8%BF%B0&deviceDetailInfo=aaa%E8%AE%BE%E5%A4%87%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF&ownProject=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&addTime=&random=79b5fb00-6f97-b0c6-7f50-211176996e0d&Action=get
+      修改: http://127.0.0.1:8080/CustFlow/servlet/AddDeviceServlet?guid=FC9C1884-0712-4D3E-B040-13B40649DFC3&deviceName=aaa&ownDeviceType=device_cust&deviceUUID=aaaaaaaaaaaaa&deviceDescription=aaa%E8%AE%BE%E5%A4%87%E6%8F%8F%E8%BF%B04&deviceDetailInfo=aaa%E8%AE%BE%E5%A4%87%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF&ownProject=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&addTime=2013-10-28%2014:44:47&random=76633b40-fd2a-44c5-9e06-c185e581e527&Action=get
+    返回: SUCCESS
+  16) 设备信息-删除，禁用，解除绑定
+    请求: http://127.0.0.1:8080/CustFlow/servlet/ChangeDeviceRegisterServlet?Guid=cb709eb0-4f2c-11e3-aa50-9c4e36c5898c&isRegister=true&random=3b57e4b0-ad0c-de63-f607-aa377dc3861e&Action=get
+    返回: {"state":"0"}
+
+    请求:http://127.0.0.1:8081/CustFlow/servlet/ChangeDeviceUsableServlet?Guid=5EEFC54A-4742-4C3B-BA16-A303C6AC4012&isUsable=false&random=42b8ac53-cdeb-15cf-df2c-7747f6ffd74f&Action=get
+    返回: {"state":"0"}
+  16.1) 断开设备
+    请求: http://127.0.0.1:8080/CustFlow/servlet/DeviceConnectExistServlet?Guid=5EEFC54A-4742-4C3B-BA16-A303C6AC4012&random=a5c95702-d69a-5876-3d3b-b5eb60088557
+
+    Guid: 设备 dataguid
+    返回:{"deviceuuid":""}
+
+  16.2) 获取项目设备列表 GetDeviceTypeServlet
+    请求: http://127.0.0.1:8080/CustFlow/servlet/GetDeviceTypeServlet?proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&random=4fb1f7aa-2118-f0cd-98fe-ee69672a3aba&Action=get
+    返回: [{"guid":"d014e458-4fa9-11e3-aa50-9c4e36c5898c","name":"aa","isvirtual":1},{"guid":"A1C2A2A8-B1B0-4B83-ACF7-CBA0B81F632A","name":"111","isvirtual":0},{"guid":"A8A0AFC5-768D-4597-9D5A-12617B41ACE5","name":"11","isvirtual":0},{"guid":"cb70fb9e-4f2c-11e3-aa50-9c4e36c5898c","name":"1231","isvirtual":0},{"guid":"E1D9DBC7-0DDA-4E6A-9CBE-76E5C5D1587A","name":"6","isvirtual":0},{"guid":"A951F315-6C65-4D8F-B370-83414FD0D03F","name":"4","isvirtual":0},{"guid":"A465B7E7-C71E-4665-B8AF-21A534328165","name":"77","isvirtual":0},{"guid":"F941DF13-BCEA-4442-A681-D897D3C9AAAB","name":"虚拟5","isvirtual":1},{"guid":"21F8A444-93D2-4158-BEC4-3A5951B3BA1F","name":"虚拟测试1","isvirtual":1},{"guid":"53a69fa0-90f5-41c0-ae84-d94eb8ec993e","name":"测试6","isvirtual":0},{"guid":"30b96c4a-728b-4e0b-9dba-fd97f0a6f3eb","name":"真实测试2222222222222222222222222222","isvirtual":0},{"guid":"83C4C3C5-0D1B-4080-9E0E-66F1670C81BA","name":"虚拟18","isvirtual":1},{"guid":"7DB45718-B9AB-4988-9635-5A4DD003BAA6","name":"虚拟7","isvirtual":1},{"guid":"AB6F852D-4B4C-4456-B9CB-94B6C2080C93","name":"虚拟555","isvirtual":1},{"guid":"24EF8497-746D-4FB2-9DDD-FB8D5A9D319F","name":"真实8","isvirtual":0},{"guid":"389FBB76-729A-4A9B-842E-3FE14083F163","name":"真实6","isvirtual":0},{"guid":"4BA878BA-5E9E-4E65-A361-8616B6FD5D73","name":"真实99","isvirtual":0},{"guid":"a8aa92cf-9322-43d2-8372-6b7cdef3c4f4","name":"年龄测试1","isvirtual":0},{"guid":"A9E69485-EC99-4ECE-AE0B-E31FA414A4A6","name":"虚拟55","isvirtual":1},{"guid":"30b96c4a-728b-4e0b-9dba-fd97f0a6f3eb","name":"真实测试1","isvirtual":0},{"guid":"665F9F34-78B5-4908-ADF3-34F9A0A99E67","name":"真实测试7","isvirtual":0}]
+
+  17) 虚拟设备信息-查询设备
+    请求: 
+      项目全部  : http://127.0.0.1:8080/CustFlow/servlet/VirtualDeviceListServlet?beginIndex=0&endIndex=10&proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&random=93c44ecb-4065-7e20-6a73-52000d43a7bf&Action=get
+      项目设备名: http://127.0.0.1:8080/CustFlow/servlet/VirtualDeviceListServlet?beginIndex=0&endIndex=10&proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&devicename=1&random=1ef03939-8c78-aeec-d502-d3d54610f88b&Action=get
+        http://127.0.0.1:8080/CustFlow/servlet/VirtualDeviceListServlet?beginIndex=0&endIndex=12&proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&random=8e47c6e2-63c1-5e1f-7226-f1010e904f77&Action=get
+    返回: {"deviceList":[{"realDeviceCount":0,"strGuid":"7BB84884-6E05-435B-A555-B29668FB41BF","strDataGuid":"F941DF13-BCEA-4442-A681-D897D3C9AAAB","strFromTable":"device_cust","strDeviceName":"虚拟5"},{"realDeviceCount":2,"strGuid":"0F3AA585-49DC-4482-B8B4-D9911529692F","strDataGuid":"21F8A444-93D2-4158-BEC4-3A5951B3BA1F","strFromTable":"device_cust","strDeviceName":"虚拟测试1"},{"realDeviceCount":0,"strGuid":"94F6FDD6-35D8-40DD-AAD3-E4A714BE5F9E","strDataGuid":"83C4C3C5-0D1B-4080-9E0E-66F1670C81BA","strFromTable":"device_cust","strDeviceName":"虚拟18"},{"realDeviceCount":1,"strGuid":"3F13365C-7B9B-4646-8945-D54F29A60FF3","strDataGuid":"7DB45718-B9AB-4988-9635-5A4DD003BAA6","strFromTable":"device_cust","strDeviceName":"虚拟7"},{"realDeviceCount":1,"strGuid":"55D9FD53-9E3A-4754-9462-755723A978F1","strDataGuid":"E8DBE5EE-8F1B-43CF-A0B1-4B29F5028F82","strFromTable":"device_cust","strDeviceName":"虚拟55555"},{"realDeviceCount":0,"strGuid":"61411070-4CEA-4B36-AF23-468FF7A7EDD0","strDataGuid":"AB6F852D-4B4C-4456-B9CB-94B6C2080C93","strFromTable":"device_cust","strDeviceName":"虚拟555"},{"realDeviceCount":2,"strGuid":"B4B2AAAC-71DE-402A-A2EA-64D654DF4D1E","strDataGuid":"A9E69485-EC99-4ECE-AE0B-E31FA414A4A6","strFromTable":"device_cust","strDeviceName":"虚拟55"}],"itemCount":7}
+  
+  18) 虚拟设备信息-虚拟设备详细信息
+    请求: http://127.0.0.1:8080/CustFlow/servlet/DevDetailServlet?Guid=0F3AA585-49DC-4482-B8B4-D9911529692F&FromTable=device_cust&random=b2917b71-86db-6525-c4fb-6d6140611235&Action=get
+    返回: {"deviceDescription":"8","deviceDetailInfo":"8","deviceName":"虚拟测试1","detailOwnProject":"8fcfe580-d63e-4a20-8ffd-32c89a3c7162","isProject":true,"deviceUUID":"8","ownDeviceType":"device_cust","addTime":"2013-10-09 15:56:40"}
+  19) 虚拟设备信息-虚拟设备详细信息-获取虚拟设备对应设备清单
+    请求: http://127.0.0.1:8080/CustFlow/servlet/GetRightLeftDeviceServlet?proguid=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&virtualguid=21F8A444-93D2-4158-BEC4-3A5951B3BA1F&random=4f2ab348-649a-39ae-504d-d2c9143faab0&Action=get
+    返回: 
+        JSON:
+        alreadyDevice=[obj]
+            obj:
+                guid "e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95" 
+                name "真实测试2222222222222222222222222222"
+        alternativeDevice=[obj]
+            obj:
+                guid "e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95" 
+                name "真实测试2222222222222222222222222222"
+
+        实际数据:
+        {"alreadyDevice":[{"guid":"e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95","name":"真实测试2222222222222222222222222222"},{"guid":"dfaf2fd2-4e7d-4e33-a79d-717d6674c1e0","name":"真实测试1"},{"guid":"0DAE73E3-FF43-4E74-A658-7449BD3455D5","name":"真实测试7"}],"alternativeDevice":[{"guid":"e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95","name":"真实测试2222222222222222222222222222"},{"guid":"dfaf2fd2-4e7d-4e33-a79d-717d6674c1e0","name":"真实测试1"},{"guid":"7BB84884-6E05-435B-A555-B29668FB41BF","name":"虚拟5"},{"guid":"0DAE73E3-FF43-4E74-A658-7449BD3455D5","name":"真实测试7"},{"guid":"53a69fa0-90f5-41c0-ae84-d94eb8ec993e","name":"测试6"},{"guid":"B4B2AAAC-71DE-402A-A2EA-64D654DF4D1E","name":"虚拟55"},{"guid":"28C20CE1-2E84-44BE-A4C4-3A56BA506E46","name":"真实6"},{"guid":"97127AD7-196A-4266-A95A-13EB7F10A420","name":"真实8"},{"guid":"E341ADA9-1C66-4596-922F-509C91EABB2C","name":"真实99"},{"guid":"61411070-4CEA-4B36-AF23-468FF7A7EDD0","name":"虚拟555"},{"guid":"55D9FD53-9E3A-4754-9462-755723A978F1","name":"虚拟55555"},{"guid":"3F13365C-7B9B-4646-8945-D54F29A60FF3","name":"虚拟7"},{"guid":"94F6FDD6-35D8-40DD-AAD3-E4A714BE5F9E","name":"虚拟18"},{"guid":"FC9C1884-0712-4D3E-B040-13B40649DFC3","name":"aaa"},{"guid":"a8aa92cf-9322-43d2-8372-6b7cdef3c4f4","name":"年龄测试1"}]}
+  20) 虚拟设备信息-增加，修改
+    请求:
+      增加: http://127.0.0.1:8080/CustFlow/servlet/AddVirtualDeviceServlet?guid=&deviceName=new%E8%99%9A%E6%8B%9F&FromTable=&ownProject=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&alreadyDevice=e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95,7BB84884-6E05-435B-A555-B29668FB41BF&deviceDescription=new%E8%99%9A%E6%8B%9F%E6%8F%8F%E8%BF%B0&deviceDetailInfo=&isProjectDevice=false&addTime=&random=4e062f36-816a-089d-2420-286b2fd6bf6e&Action=get
+      修改: http://127.0.0.1:8080/CustFlow/servlet/AddVirtualDeviceServlet?guid=217267FA-8D56-4D23-A0CC-1A42DB779DEB&deviceName=new%E8%99%9A%E6%8B%9F&FromTable=device_cust&ownProject=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&alreadyDevice=7BB84884-6E05-435B-A555-B29668FB41BF,e5f57fdc-5e78-4bc1-9d37-255ecb1eaa95,dfaf2fd2-4e7d-4e33-a79d-717d6674c1e0&deviceDescription=new%E8%99%9A%E6%8B%9F%E6%8F%8F%E8%BF%B011&deviceDetailInfo=&isProjectDevice=false&addTime=2013-10-28%2015:10:38&random=2dcb90df-5b21-4178-23af-96150d60bda7&Action=get
+    返回: SUCCESS
+  21) 设备信息-删除，禁用，解除绑定
+    请求: http://127.0.0.1:8080/CustFlow/servlet/DelVirtualDeviceServlet?Guid=B4B2AAAC-71DE-402A-A2EA-64D654DF4D1E&FromTable=device_cust&random=cb9dfc42-6109-0d61-63b7-67a71f8043ae&Action=get
+    返回: SUCCESS
+  
+
+6. 客户信息管理
+  22) 查询:
+      请求:
+        客户查询: http://127.0.0.1:8080/CustFlow/servlet/CustListServlet?beginIndex=0&endIndex=10&custname=te&random=1ee27ebc-d32a-69aa-96b3-17a92649a250&Action=get
+        默认查询: http://127.0.0.1:8080/CustFlow/servlet/CustListServlet?beginIndex=0&endIndex=10&random=6e7b2e97-dc7d-f32a-169b-1d6f303ff084&Action=get
+      返回:
+        {"custList":[{"strGuid":"2C995F15-4A2D-4A17-87E1-C153C1F0DE07","strCustName":"44","strCustDescription":"44"},{"strGuid":"5D3609B4-9A7B-419B-9A15-41BB622E4575","strCustName":"test","strCustDescription":"6"},{"strGuid":"F3F1537E-FB9A-4138-AE8D-767B0D8790C0","strCustName":"林伟红","strCustDescription":"55555555555555555555555555555555555555555555555555"}],"itemCount":3}
+  23) 获取项目信息
+      请求: http://127.0.0.1:8080/CustFlow/servlet/GetProjectTypeServlet
+      返回:
+        <option value='-1'>--请选择项目--</option>
+        <option value ='8fcfe580-d63e-4a20-8ffd-32c89a3c7162'>五角场万达</option>
+        <option value ='52767307-243F-4774-A1C8-4A307B31D4F3'>宝山万达</option>
+        <option value ='5A6D2D1B-6E84-4B83-9107-07D18D120D69'>松江高科技园区</option>
+        <option value ='CF4F46DF-2E1A-4BD9-B042-EAE629FCA7FA'>林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林林</option>
+  24) 增加，修改
+        请求: http://127.0.0.1:8080/CustFlow/servlet/AddCustServlet?guid=5D3609B4-9A7B-419B-9A15-41BB622E4575&custName=test&custPwd=&responsiblePerson=rayeye&custDescription=6&custContact=6&custDetailInfo=6&ownProject=8fcfe580-d63e-4a20-8ffd-32c89a3c7162&addTime=2013-10-14%2013:11:40&random=15dc6cfe-587b-5da9-7af9-1d38e3242579&Action=get
+        返回:SUCCESS
+  25) 删除
+        请求: http://127.0.0.1:8080/CustFlow/servlet/DelCustServlet?Guid=5D3609B4-9A7B-419B-9A15-41BB622E4575&random=46a54299-be5e-7021-adf6-aee535433dbe&Action=get
+        返回:SUCCESS
+  26) 客户详细信息
+        请求: http://127.0.0.1:8080/CustFlow/servlet/CustDetailServlet?Guid=5D3609B4-9A7B-419B-9A15-41BB622E4575&random=e7653468-c840-e2a0-e5d9-7ded12974b55&Action=get
+        返回: {"custDetailInfo":"6","responsiblePerson":"rayeye","ownProject":"8fcfe580-d63e-4a20-8ffd-32c89a3c7162","custPwd":"**********","custContact":"6","custName":"test","addTime":"2013-10-14 13:11:40","custDescription":"6"}
+
+
+7. 登录，登出
+  27) 登录:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/LoginServlet?username=aa&userpwd=bb&userCookie=undefined&random=602e6d6e-367a-02ba-e49f-c97447941db3&Action=get
+    返回: 
+    v2: {"isSuccess":false}
+    v3: {"userName":"admin","isAdmin":true,"isSuccess":true}
+    v3 项目管理用户: {"proName":"\346\235\276\346\261\237\351\253\230\347\247\221\346\212\200\345\233\255\345\214\272","proGuid":"5A6D2D1B-6E84-4B83-9107-07D18D120D69","userName":"test","isAdmin":false,"isSuccess":true,"userGuid":"5D3609B4-9A7B-419B-9A15-41BB622E4575"
+  28) 登出:
+    请求: http://127.0.0.1:8080/CustFlow/servlet/LogOutServlet?Action=get
+
+8. 其它
+    8.1) SSH 连接状态控制
+        请求: http://rayeye.cn:8081/CustFlow/servlet/ChangeDeviceConnectServlet?Guid=8ffc07ca5e1d11e38dbc00163e002ba0&isConnect=false&random=8b65cf21-42fb-71fa-5817-a8177989f4fd&Action=get
+        返回: SUCCESS
+html/
+    页面
+  29) 修改密码
+    请求: http://127.0.0.1:8080/CustFlow/servlet/ModifyPwdCustServlet?guid=1CF71688-EDBB-4723-A41A-42F8078558F2&custName=%E7%AC%AC%E4%B8%80%E9%A3%9F%E5%93%81&custPwd=1&random=6231431c-1086-5340-1608-645f15fa8e8f&Action=get
+    返回: SUCCESS
+

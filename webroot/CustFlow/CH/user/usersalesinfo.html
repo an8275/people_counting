@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>客流量统计 -销售信息</title>
+
+    <link rel="stylesheet" href="../css/layout.css" type="text/css"
+        media="screen" />
+    <link rel="stylesheet" href="../css/style.css" type="text/css"
+        media="screen" />
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript">
+    </script>
+    <script src="../js/jquery/hideshow.js" type="text/javascript">
+    </script>
+    <script src="../js/jquery/jquery.tablesorter.min.js"
+        type="text/javascript">
+    </script>
+    <script type="text/javascript"
+        src="../js/jquery/jquery.equalHeight.js">
+    </script>
+    <script type="text/javascript" src="../js/menu.control.js">
+    </script>
+    <script type="text/javascript"
+        src="../js/My97DatePicker/WdatePicker.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.util.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.page.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.table.js">
+    </script>
+    <script type="text/javascript" src="../js/login.js">
+    </script>
+    <script type="text/javascript" src="../js/select.load.js">
+    </script>
+    <script type="text/javascript" src="../js/cust.modify.js">
+    </script>
+    <script type="text/javascript" src="../js/custsaleslist.table.js"> </script>
+<script type="text/javascript" src="../js/custsalesdetail.table.js"> </script>
+
+</head>
+
+
+<body>
+
+    <header id="header">
+        <hgroup>
+            <h1 class="site_title">
+				<div style="width:100%;height:100%;text-align:center">
+					<img id="logo" style="width:80%;height:100%;" src="" onerror="javascript:this.src='../images/logo/logo.png'"/>
+				</div>
+			</h1>
+            <h2 class="section_title">客 流 量 统 计 系 统
+            </h2>
+            <div class="btn_view_site">
+                <a onclick="LogOut_AJAX();">登出</a>
+            </div>
+        </hgroup>
+    </header>
+    <!-- end of header bar -->
+
+    <section id="secondary_bar">
+        <div class="user">
+            <p>
+                <a onclick='javascript:location.replace("userinfo.html")' userinfo.html id="loginusername"></a>
+            </p>
+            <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+        </div>
+        <div class="breadcrumbs_container">
+            <article class="breadcrumbs">
+                <a onclick='javascript:location.replace("index.html")'>主页</a>
+                <div class="breadcrumb_divider"></div>
+                <a class="current">销售信息</a>
+            </article>
+        </div>
+    </section>
+    <!-- end of secondary bar -->
+
+    <aside id="sidebar" class="column width_quarter">
+        <form class="quick_search">
+            <input type="text" value="快速搜索"
+                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+        </form>
+        <hr />
+        <h3>
+			客流人数统计
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>人流量</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>详细进出人数</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>平均停留时间</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>详细停留人数</a>
+			</li>
+            <li class="icn_virtualequ">
+                <a onclick='javascript:location.replace("passangerflowmanage.html")'>区域管理</a>
+            </li>
+		</ul>
+		
+		<h3>
+			客户信息管理
+		</h3>
+            <ul class="toggle">
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>个人信息</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>设备信息</a>
+                </li>
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("usersalesinfo.html")'>销售信息</a>
+                </li>
+            </ul>
+        <footer>
+            <hr />
+        </footer>
+    </aside>
+    <!-- end of sidebar -->
+
+    <section id="main" class="column">
+
+
+        <article class="module width_full" id="listarticle">
+            <header>
+                <h3 class="tabs_involved">销售信息
+                </h3>
+            </header>
+            <div class="bulk-actions-txt bulk-actions-time align-left">
+                <span>日期:
+                    <input
+                        name="nowTime" id="nowTime" type="text"
+                        onfocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{\'%y-%M-%d\'}',onpicked:function(){iRow = 0;
+    SetPageCtrlTable('#CustListTable', CustListTable_AJAX());$('#modifyBtn').html('修改');$('#cancelBtn').hide();}})"
+                        style="width: 200px;" readonly="readonly"/>
+                </span>
+                <input type="hidden" id ="deviceGuid" id="deviceGuid" value="">
+            </div>
+            <div class="bulk-actions-btn align-right">
+                <a class="alt_btn" id="cancelBtn" onclick="ClickCancel();">取消</a>
+            </div>
+            <div class="bulk-actions-btn align-right">
+                <a class="alt_btn" id="modifyBtn" onclick="ModifyDeviceChange();">修改</a>
+            </div>
+            <div class="clear"></div>
+
+        <div class="tab_container bulk-actions-txt">
+            <div id="CustListTable_Shadow" class="shadow">
+                <img src="../images/load.gif" />
+            </div>
+            <div id="CustListTable_Error" class="error">
+                <img src="../images/error.png" />
+            </div>
+            <table class="tablesorter hide" cellspacing="0" id="CustListTable" style="float:left;">
+                <thead>
+                    <tr>
+                        <th align="left">区域
+                        </th>
+                        <th align="center">客户描述
+                        </th>
+                        <th align="center">销售额(元）
+                        </th>
+                        <th align="center">成单数(笔）
+                        </th>
+                        <th align="center">添加时间
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <table class="pagination" id="PageCtrl">
+                <tr>
+                    <td colspan="5">
+                        <a id="TopPage" title="首页" onclick="OnClick_TopPage(this);">首页</a>
+                        <a id="PreviousPage" title="上一页"
+                            onclick="OnClick_PreviousPage(this);">&laquo;上一页</a>
+                        <input type="text" name="PageInput" class="input_txt_col"
+                            id="PageInput" onkeydown="getEnter(this,event);" />
+                        <span id="PageCount">(1-1)</span>
+                        <a id="NextPage" title="下一页" onclick="OnClick_NextPage(this);">下一页 &raquo;</a>
+                        <a id="BottomPage" title="末页" onclick="OnClick_BottomPage(this);">末页</a>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        </article>
+        <!-- end of content manager article -->
+
+        <div class="spacer"></div>
+    </section>
+
+
+</body>
+
+</html>

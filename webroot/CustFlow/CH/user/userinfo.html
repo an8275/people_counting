@@ -1,0 +1,295 @@
+﻿<!doctype html>
+<html lang="en">
+
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>客流量统计 -个人信息</title>
+
+		<link rel="stylesheet" href="../css/layout.css" type="text/css"
+			media="screen" />
+		<link rel="stylesheet" href="../css/style.css" type="text/css"
+			media="screen" />
+		<!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+		<script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript">
+</script>
+		<script src="../js/jquery/hideshow.js" type="text/javascript">
+</script>
+		<script src="../js/jquery/jquery.tablesorter.min.js"
+			type="text/javascript">
+</script>
+		<script type="text/javascript"
+			src="../js/jquery/jquery.equalHeight.js">
+</script>
+		<script type="text/javascript" src="../js/menu.control.js">
+</script>
+		<script type="text/javascript"
+			src="../js/My97DatePicker/WdatePicker.js">
+</script>
+		<script type="text/javascript" src="../js/ope.util.js">
+</script>
+		<script type="text/javascript" src="../js/ope.page.js">
+</script>
+		<script type="text/javascript" src="../js/ope.table.js">
+</script>
+		<script type="text/javascript" src="../js/login.js">
+</script>
+		<script type="text/javascript" src="../js/select.load.js">
+</script>
+		<script type="text/javascript" src="../js/cust.modify.js">
+</script>
+		<script type="text/javascript" src="../js/uploadlogo.js">
+</script>
+		<script type="text/javascript" src="../js/ajaxfileupload.js">
+</script>
+
+	</head>
+
+
+	<body>
+
+		<header id="header">
+		<hgroup>
+		<h1 class="site_title">
+			<div style="width:100%;height:100%;text-align:center">
+				<img id="logo" style="width:80%;height:100%;" src="" onerror="javascript:this.src='../images/logo/logo.png'"/>
+			</div>
+		</h1>
+		<h2 class="section_title">
+			客 流 量 统 计 系 统
+		</h2>
+		<div class="btn_view_site">
+			<a onclick="LogOut_AJAX();">登出</a>
+		</div>
+		</hgroup>
+		</header>
+		<!-- end of header bar -->
+
+		<section id="secondary_bar">
+		<div class="user">
+			<p>
+				<a onclick='javascript:location.replace("userinfo.html")' userinfo.html id="loginusername"></a>
+			</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs">
+			<a onclick='javascript:location.replace("index.html")'>主页</a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current">个人信息</a>
+			</article>
+		</div>
+		</section>
+		<!-- end of secondary bar -->
+
+		<aside id="sidebar" class="column width_quarter">
+		<form class="quick_search">
+			<input type="text" value="快速搜索"
+				onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+		</form>
+		<hr />
+		<h3>
+			客流人数统计
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>人流量</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>详细进出人数</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>平均停留时间</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>详细停留人数</a>
+			</li>
+            <li class="icn_virtualequ">
+                <a onclick='javascript:location.replace("passangerflowmanage.html")'>区域管理</a>
+            </li>
+		</ul>
+		
+		<h3>
+			客户信息管理
+		</h3>
+            <ul class="toggle">
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>个人信息</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>设备信息</a>
+                </li>
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("usersalesinfo.html")'>销售信息</a>
+                </li>
+            </ul>
+		<footer>
+		<hr />
+		</footer>
+		</aside>
+		<!-- end of sidebar -->
+
+		<section id="main" class="column">
+
+
+		<article class="module width_full" id="listarticle">
+		<header>
+		<h3 class="tabs_involved">
+			个人信息
+		</h3>
+		</header>
+		<div class="tab_content bulk-actions-txt" >
+			<div id="CustDetailTable_Shadow" class="shadow">
+				<img src="../images/load.gif" />
+			</div>
+			<div id="CustDetailTable_Error" class="error">
+				<img src="../images/error.png" />
+			</div>&nbsp
+			<table id="CustDetailTable" class="tablesorter" cellspacing="0">
+				<colgroup>
+					<col class="tdwidth5"></col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="text-right">
+							客户名：
+						</td>
+						<td>
+							<!-- 隐藏的Guid -->
+							<input name="custGuid" id="custGuid" type="hidden" value=""
+								disabled />
+							<input name="custName" id="custName"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" value="客户S" readonly="readonly" />
+						</td>
+					</tr>
+                    <tr>
+                        <td class="text-right">密&nbsp;&nbsp;码：
+                        </td>
+                        <td>
+                            <input name="custPwd" id="custPwd" class="text-input inputsize2"
+                                type="password" maxlength="50" class="input_txt_col" value=""
+                                readonly="readonly" disabled />
+                            <div class="bulk-actions-btn align-right">
+                                <a id="BtnModify" class="alt_btn" onclick="ModifyPwd();">修改密码</a>
+                            </div>
+                        </td>
+                    </tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							新密码：
+
+						</td>
+						<td>
+							<input name="newCustPwd" id="newCustPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							确认密码：
+
+						</td>
+						<td>
+
+							<input name="newCustPwd" id="confirmCustPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							所属项目：
+						</td>
+						<td>
+							<select name="ownProject" id="ownProject" disabled
+								class="input_txt_col inputsize2">
+								<option value="-1">
+									--请选择项目--
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							项目负责人：
+						</td>
+						<td>
+							<input name="responsiblePerson" id="responsiblePerson"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" value="highlight" readonly="readonly"
+								disabled />
+						</td>
+					</tr>
+                    <tr>
+                        <td class="text-right">设置营业时间：
+                        </td>
+                        <td>
+                            <span>开始时段:
+                            <input
+                                name="startTime" id="startTimeGap" type="text" disabled="disabled"
+                                onfocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'HH:mm:00'})"
+                                style="width: 100px;" readonly="readonly" />
+                            </span>
+                            <span>结束时段:
+                            <input
+                                name="endTime" id="endTimeGap" type="text" disabled="disabled"
+                                onfocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'HH:mm:00'})"
+                                style="width: 100px;" readonly="readonly" />
+                            </span>
+                            <div class="bulk-actions-btn align-right">
+                                <a id="ModifyStartEndTimeBtn" class="alt_btn" onclick="ModifyStartEndTime();">修改营业时间</a>
+                            </div>
+                        </td>
+                    </tr>
+					<tr>
+						<td class="text-right">
+							纳入时间：
+						</td>
+						<td colspan="3">
+							<input name="addTime" id="addTime" class="text-input inputsize2"
+								type="text" class="input_txt_col" maxlength="50"
+								onFocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{\'%y-%M-%d\'}'})"
+								readonly="readonly" disabled />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="center">
+							<div id="wait_loading" style="padding: 50px 0 0 0;display:none;">
+								<div style="width: 103px;margin: 0 auto;"><img src="../images/load.gif"/></div>
+								<br></br>
+								<div style="width: 103px;margin: 0 auto;"><span>请稍候...</span></div>
+								<br></br>
+							</div>
+							<div style="text-align:left;position:relative;width:350px;">
+								 <input type='text' name='textfield' id='textfield' style="height:22px; border:1px solid #cdcdcd; width:180px;color:black;" value='建议上传png类型图片'/>  
+								 <input type='button' style="height:24px; width:70px;background-color:#30B0C8;color:black;" value='浏览...' />
+								 <input type="file" name="file" style="position:absolute; top:0; left:0; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px" id="file" size="28" onchange="check(this)" />
+								 <input type="button" id="btnUpload" name="btnUpload" style="height:24px;background-color:#30B0C8;color:black;" value="上传LOGO" onclick="ajaxFileUpload();"/>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+
+		</article>
+		<!-- end of content manager article -->
+
+		<div class="clear"></div>
+
+		<div class="spacer"></div>
+		</section>
+
+
+	</body>
+
+</html>

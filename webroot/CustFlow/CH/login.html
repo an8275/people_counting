@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"    />
+	</head>
+
+	<!--<link href="css/login.css" rel="stylesheet" type="text/css" />-->
+	
+	<script src="js/jquery/jquery-1.8.0.min.js">
+</script>
+	<script type="text/javascript" src="js/ope.util.js">
+</script>
+	<script type="text/javascript" src="js/login.js">
+</script>
+
+<title>
+	客流统计系统
+</title>
+<style type="text/css">
+    body {
+        margin:0;
+        padding:0;
+        text-align:center;
+        background:url(images/login.jpg) no-repeat top center;
+        
+    }
+    .loginbox {
+        margin:0 auto;
+        padding:397px 0 0 77px !important;
+        padding:394px 0 0 77px;
+        height:100px;
+        width:327px;
+    }
+    form {
+        margin:0;
+        padding:0;
+    }
+    .loginleft, .loginright {
+        float:left;
+    }
+    .loginleft {
+        padding-top:7px;
+    }
+    .loginleft input {
+        width:200px !important;
+        width:198px;
+    }
+    .password {
+        padding-top:36px !important;
+        padding-top:32px;
+    }
+    #submit {
+        margin-left:22px;
+        margin-top:2px;
+        height:95px;
+        width:94px;
+        border:none;
+        background: no-repeat;
+    }
+</style>
+</head>
+<body>
+    <form method="post" action="" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTEyMTc3MTQwNmRkzSg/pSqiouK9E0ONpJr+ug5SM4SpDJuPYLdPRA7NVfY=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="90059987" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAKRouPjBwLEya/vAwLjls/JDwLcu4S2BEmUDfrouBQX/9DcMvJnaVroK+eYvAyVVElCxpgmNlnv" />
+</div>
+    <div class="loginbox">
+		        
+				<div class="loginleft">
+					<div>
+                        <input name="username" type="text"  id="username" />
+					</div>
+					<div class="password">
+						<input name="userpwd" type="password"  id="userpwd" />
+					</div> 
+				</div>
+				
+				<div class="loginright">
+                    <input type="button" name="submit" value="" id="submit" onclick="Login_AJAX();"/>
+				</div>
+                <span id="loginfail"></span>
+				<div id="errDiv" style="Color:red;margin-left:-120px;">
+
+				</div>
+				<span style="visibility:hidden"> <input id="userCookie"  
+							name='userCookie' type="checkbox" class="field login-checkbox"
+							value="First Choice" tabindex="4" /> <label class="choice"
+							for="userCookie">
+							记住用户名
+						</label> </span>
+		   
+		</div>
+    </form>
+</body>
+</html>

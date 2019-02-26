@@ -1,0 +1,196 @@
+diff --git a/server/custom_utils.py b/server/custom_utils.py
+index 38fa822..9a70909 100644
+--- a/server/custom_utils.py
++++ b/server/custom_utils.py
+@@ -138,6 +138,38 @@ def get_device_dataguid(guid=None, proguid=None, uuid=None):
+ 
+     return dataguid
+ 
++def get_device_info(guid=None, proguid=None, uuid=None):
++    ''' def get_device_info(guid=None, proguid=None, uuid=None): 从输入条件获取设备信息
++    '''
++    device_info = {}
++    where = ''
++
++    ## 忽略无效
++    if guid is None and proguid is None and uuid is None:
++        return dataguid
++    
++    if guid is not None:
++        where += " and guid='%s'"%(guid)
++    if proguid is not None:
++        where += " and proguid='%s'"%(proguid)
++    if uuid is not None:
++        where += " and uuid='%s'"%(uuid)
++
++    sql = 'select * from device_cust where 1 %s'%(where)
++
++    ## DB init
++    db = doDB.sqldb(cfg=doDB.cfg)
++
++    res = db.do_select(sql)
++    
++    if res[0] > 0:
++        device_info = res[1][0]
++
++    ## DB close
++    db.sqldb_close()
++
++    return device_info
++
+ def get_device_control_status(device_guid):
+     ''' get_device_control_status(device_guid): 获取设备控制状态
+         返回值: issign, isusable 元组
+@@ -217,6 +249,23 @@ def get_device_state(device_guid, is_sign=None, is_usable=None):
+ 
+     return state
+ 
++def ssh_connected(uuid):
++    ''' def ssh_connected(uuid): 检查设备是否ssh连线'''
++    connected = False
++
++    sql = "select * from connect_device where deviceuuid='%s'"%(uuid)
++
++    ## DB init
++    db = doDB.sqldb(cfg=doDB.cfg)
++    res = db.do_select(sql)
++    if res[0] > 0:
++        connected = True
++
++    ## DB close
++    db.sqldb_close()
++
++    return connected
++
+ ####################
+ ## test
+ if __name__ == '__main__':
+diff --git a/server/device.py b/server/device.py
+index d17d1ab..a16702f 100644
+--- a/server/device.py
++++ b/server/device.py
+@@ -8,8 +8,6 @@ import uuid
+ import json
+ import doDB 
+ 
+-
+-
+ def AddDevice(env, bodysize, input, output):
+     ''' device->AddDevice: 增加/修改设备信息
+     请求:
+@@ -105,7 +103,7 @@ def AdminDeviceList(env, bodysize, input, output):
+ 
+     ## TODO 两个表合并
+     ## 从客流量设备表查询
+-    sql = "SELECT guid as strGuid, name as strDeviceName, issign as isSign, isusable as isUsable FROM device_cust where isvirtual=false and proguid='%s' order by addtime desc limit %s,%s;"%(url['proguid'], url['beginIndex'], url['endIndex'])
++    sql = "SELECT uuid, guid as strGuid, name as strDeviceName, issign as isSign, isusable as isUsable FROM device_cust where isvirtual=false and proguid='%s' order by addtime desc limit %s,%s;"%(url['proguid'], url['beginIndex'], url['endIndex'])
+ 
+     res = db.do_select(sql)
+ 
+@@ -127,6 +125,8 @@ def AdminDeviceList(env, bodysize, input, output):
+             else:
+                 device['isUsable'] = False
+ 
++            device['isConnect'] = ssh_connected(device['uuid'])
++
+         msg['deviceList'].extend(res[1])
+         msg['itemCount']=res[0]
+ 
+@@ -330,8 +330,43 @@ def ChangeDeviceUsable(env, bodysize, input, output):
+     output.write(CONTENT_TYPE_HEAD)
+     output.write(json.dumps(msg))
+ 
++def ChangeDeviceConnect(env, bodysize, input, output):
++    ''' device->ChangeDeviceConnect: 改变设备SSH连接使用状态
++    请求: http://rayeye.cn:8081/CustFlow/servlet/ChangeDeviceConnectServlet?Guid=8ffc07ca5e1d11e38dbc00163e002ba0&isConnect=false&random=8b65cf21-42fb-71fa-5817-a8177989f4fd&Action=get
++    Guid: device_cust.guid
++    返回: SUCCESS
++    '''
++    url = getUrlData(env)
++    print url
++    print "Into ChangeDeviceConnect"
++
++    device_info = get_device_info(guid=url['Guid'])
++
++    # 只有客流量设备有
++    del_sql = "DELETE FROM connect_device";
++
++    ins_sql = ""
++    if url['isConnect'] == 'true':
++        ins_sql = "INSERT INTO connect_device (guid, deviceuuid, curtime) VALUES ('%s', '%s', '%s')"% \
++            (uuid.uuid1().hex, device_info['uuid'], get_time())
++
++    # Gettting data from db
++    db = doDB.sqldb(cfg=doDB.cfg)
++
++    res = db.do_del(del_sql)
++    print ins_sql
++
++    if len(ins_sql) > 0:
++        res = db.do_insert(ins_sql)
++
++    msg = "SUCCESS"
++
++    # Output
++    output.write(CONTENT_TYPE_HEAD)
++    output.write(msg)
++
+ def DeviceConnectExist(env, bodysize, input, output):
+-    ''' device->DeviceConnectExist: 断开设备连接
++    ''' device->DeviceConnectExist: 检查ssh连接情况
+     请求: http://127.0.0.1:8080/CustFlow/servlet/DeviceConnectExistServlet?Guid=5EEFC54A-4742-4C3B-BA16-A303C6AC4012&random=a5c95702-d69a-5876-3d3b-b5eb60088557
+     返回:{"deviceuuid":""}
+     '''
+@@ -339,11 +374,9 @@ def DeviceConnectExist(env, bodysize, input, output):
+     print url
+     print "Into DeviceConnectExistServlet"
+ 
+-    # TODO 处理ssh反向连接?
+-
+     # Return msg
+     msg = {}
+-    msg['deviceuuid'] = "" # FIXME
++    msg['deviceuuid'] = "" #
+ 
+     # Output
+     output.write(CONTENT_TYPE_HEAD)
+diff --git a/server/r b/server/r
+index 8f40aab..5b30b63 100755
+--- a/server/r
++++ b/server/r
+@@ -7,7 +7,7 @@ cd /alidata1/web/server
+ 
+ ## restart web
+ 
+-PIDFILE=/var/run/lighttpd_webui.pid
++PIDFILE=/var/run/lighttpd_webui8081.pid
+ 
+ if [ -f $PIDFILE ]; then
+     kill -9 `cat $PIDFILE `
+@@ -16,12 +16,12 @@ fi
+ 
+ #lighttpd -f /etc/lighttpd/lighttpd_8081.conf 
+ 
+-/usr/sbin/lighttpd -f /alidata1/web/conf/lighttpd_8080.conf
++/usr/sbin/lighttpd -f /alidata1/web/conf/lighttpd_8081.conf
+ 
+ 
+ 
+ ## restart scgi
+-PROG=srv_webui.py
++PROG=srv_webui1.py
+ 
+ ID=`ps aux|grep $PROG | grep -v grep | awk '{print $2}' | xargs`
+ 
+diff --git a/server/req_route.py b/server/req_route.py
+index 0d0f5f2..9602828 100644
+--- a/server/req_route.py
++++ b/server/req_route.py
+@@ -31,6 +31,7 @@ req_route_map={
+     'ChangeDeviceRegisterServlet':ChangeDeviceRegister, #Done
+     'ChangeDeviceUsableServlet':ChangeDeviceUsable, #Done
+     'ChangeDeviceUsableServlet':ChangeDeviceUsable, #Done
++    'ChangeDeviceConnectServlet':ChangeDeviceConnect, #Done
+     'DeviceConnectExistServlet':DeviceConnectExist, #Done
+     'GetDeviceTypeServlet':GetDeviceType,  #Done
+ 

@@ -1,0 +1,219 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>客流量统计 - 平均停留时间</title>
+
+    <link rel="stylesheet" href="../css/layout.css" type="text/css"
+        media="screen" />
+    <link rel="stylesheet" href="../css/style.css" type="text/css"
+        media="screen" />
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript"
+        src="../js/My97DatePicker/WdatePicker.js">
+    </script>
+    <script src="../js/jquery/hideshow.js" type="text/javascript">
+    </script>
+    <script src="../js/jquery/jquery.tablesorter.min.js"
+        type="text/javascript">
+    </script>
+    <script type="text/javascript"
+        src="../js/jquery/jquery.equalHeight.js">
+    </script>
+    <script type="text/javascript" src="../js/menu.control.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.util.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/highcharts.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/exporting.js">
+    </script>
+    <script type="text/javascript" src="../js/jquery/export-excel.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.page.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.table.js">
+    </script>
+    <script type="text/javascript" src="../js/login.js">
+    </script>
+    <script type="text/javascript" src="../js/select.load.js">
+    </script>
+    <script type="text/javascript" src="../js/user.project.averstay.chart.js">
+    </script>
+    <script type="text/javascript" src="../js/ope.chart.js">
+    </script>
+
+</head>
+
+
+<body>
+
+    <header id="header">
+        <hgroup>
+            <h1 class="site_title">
+				<div style="width:100%;height:100%;text-align:center">
+					<img id="logo" style="width:80%;height:100%;" src="" onerror="javascript:this.src='../images/logo/logo.png'"/>
+				</div>
+			</h1>
+            <h2 class="section_title">客 流 量 统 计 系 统
+            </h2>
+            <div class="btn_view_site">
+                <a onclick="LogOut_AJAX();">登出</a>
+            </div>
+        </hgroup>
+    </header>
+    <!-- end of header bar -->
+
+    <section id="secondary_bar">
+        <div class="user">
+            <p>
+                <a href="#" id="loginusername"></a>
+            </p>
+            <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+        </div>
+        <div class="breadcrumbs_container">
+            <article class="breadcrumbs">
+                <a onclick='javascript:location.replace("index.html")'>首页</a>
+                <div class="breadcrumb_divider"></div>
+                <a class="current">区域-平均停留时间</a>
+            </article>
+        </div>
+    </section>
+    <!-- end of secondary bar -->
+
+    <aside id="sidebar" class="column">
+        <form class="quick_search">
+            <input type="text" value="快速搜索"
+                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+        </form>
+        <hr />
+        <h3>
+			客流人数统计
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>人流量</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>详细进出人数</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>平均停留时间</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>详细停留人数</a>
+			</li>
+            <li class="icn_virtualequ">
+                <a onclick='javascript:location.replace("passangerflowmanage.html")'>区域管理</a>
+            </li>
+		</ul>
+		
+		<h3>
+			客户信息管理
+		</h3>
+            <ul class="toggle">
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>个人信息</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>设备信息</a>
+                </li>
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("usersalesinfo.html")'>销售信息</a>
+                </li>
+            </ul>
+        <footer>
+            <hr />
+        </footer>
+    </aside>
+    <!-- end of sidebar -->
+
+    <section id="main" class="column">
+
+
+        <article class="module width_full">
+            <header>
+                <h3 class="tabs_involved">平均停留时间
+                </h3>
+            </header>
+
+            <div class="tab_container bulk-actions-txt" id="tab2">
+                <div class="bulk-actions-time" style="height: 40px; width: 94%; margin: auto;">
+                    <div>
+                        <span>开始日期:
+                            <input
+                                name="startTime" id="startTime" type="text"
+                                onfocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'endTime\',{M:-12,y:-100})}',maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})"
+                                style="width: 100px;" readonly="readonly" />
+                        </span>
+                        <span>结束日期:
+                            <input
+                                name="endTime" id="endTime" type="text"
+                                onfocus="WdatePicker({lang:'zh-cn',readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}',maxDate:'#F{\'%y-%M-%d\'}'})"
+                                style="width: 100px;" readonly="readonly" />
+                        </span>
+                        <span class="timetext timerange">区域:<select name="deviceGuid"
+                            id="deviceGuid" class="selectwidth">
+                            <option value="-1">--请选择区域--
+                            </option>
+                        </select>
+                        </span>
+                        <span class="timetext timerange">&nbsp;&nbsp;销售:<select name="deviceSales" id="deviceSales" class="selectwidth">
+                            <option value="-1">--请选择区域--
+                            </option>
+                        </select></span>
+						<span class="timetext timerange">&nbsp;&nbsp;统计方式:<select name="Methods" id="Methods" class="selectwidth">
+                            <option value="day" selected="selected">日</option>
+							<option value="month" >月</option>
+							<option value="year" >年</option>
+                        </select></span>
+                    </div>
+                </div>
+                <div style="clear: left; width: 96%; margin: auto; border-bottom: 1px solid #eeeeee;">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;图表：
+                    <button class="btn" id="staytimeChart" theme="staytimeflow">停留时间柱图</button>
+                        <button class="btn" theme="andsalesrate">停留时间与销售额</button>
+                        <button class="btn" theme="andsaleaverage">停留时间与成单数</button>
+                        <button class="btn" id="chartclear" theme="chartclear"><span style="font-weight: bold; color: #f00">重新选择</span></button>
+                        <!--<button class="btn" theme="dark-green">深绿 (dark-green)</button>-->
+                    </p>
+                </div>
+                <div class="clear"></div>
+                <div id="stay_Shadow" class="shadow">
+                    <img src="../images/load.gif" />
+                </div>
+                <!-- table表的load遮罩 -->
+                <div id="stay_Error" class="error">
+                    <img src="../images/error.png" />
+                </div>
+                <div id="averagecontainer" class="chartlist"></div>
+                <!-- 
+            
+            
+            图表
+            
+            -->
+
+            </div>
+            <!-- end of .tab_container -->
+
+        </article>
+        <!-- end of content manager article -->
+
+        <div class="clear"></div>
+
+        <div class="spacer"></div>
+    </section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,332 @@
+﻿<!doctype html>
+<html lang="en">
+
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Personal Information</title>
+
+		<link rel="stylesheet" href="../css/layout.css" type="text/css"
+			media="screen" />
+		<link rel="stylesheet" href="../css/style.css" type="text/css"
+			media="screen" />
+		<!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+		<script src="../js/jquery/jquery-1.8.0.min.js" type="text/javascript">
+</script>
+		<script src="../js/jquery/hideshow.js" type="text/javascript">
+</script>
+		<script src="../js/jquery/jquery.tablesorter.min.js"
+			type="text/javascript">
+</script>
+		<script type="text/javascript"
+			src="../js/jquery/jquery.equalHeight.js">
+</script>
+		<script type="text/javascript" src="../js/menu.control.js">
+</script>
+		<script type="text/javascript"
+			src="../js/My97DatePicker/WdatePicker.js">
+</script>
+		<script type="text/javascript" src="../js/ope.util.js">
+</script>
+		<script type="text/javascript" src="../js/ope.page.js">
+</script>
+		<script type="text/javascript" src="../js/ope.table.js">
+</script>
+		<script type="text/javascript" src="../js/login.js">
+</script>
+		<script type="text/javascript" src="../js/select.load.js">
+</script>
+		<script type="text/javascript" src="../js/cust.modify.js">
+</script>
+		<script type="text/javascript" src="../js/uploadlogo.js">
+</script>
+		<script type="text/javascript" src="../js/ajaxfileupload.js">
+</script>
+	</head>
+
+
+	<body>
+
+		<header id="header">
+		<hgroup>
+		<h1 class="site_title">
+			<div style="width:100%;height:100%;text-align:center">
+				<img id="logo" class="logostyle" src="" onerror="javascript:this.src='../images/logo/logo.png'"/>
+			</div>
+		</h1>
+		<h2 class="section_title">
+			People Flow Statistics System
+		</h2>
+		<div class="btn_view_site">
+			<a onclick="LogOut_AJAX();">Exit</a>
+		</div>
+		</hgroup>
+		</header>
+		<!-- end of header bar -->
+
+		<section id="secondary_bar">
+		<div class="user">
+			<p>
+				<a onclick='javascript:location.replace("userinfo.html")' userinfo.html id="loginusername"></a>
+			</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs">
+			<a onclick='javascript:location.replace("index.html")'>Home Page</a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current">Personal Information</a>
+			</article>
+		</div>
+		</section>
+		<!-- end of secondary bar -->
+
+		<aside id="sidebar" class="column width_quarter">
+		<form class="quick_search">
+			<input type="text" value="Quick search"
+				onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+		</form>
+		<hr />
+		<h3>
+			People Flow Statistics
+		</h3>
+		<ul class="toggle">
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("itempersonflow.html")'>People Flow Statistics</a>
+			</li>
+			<li class="icn_view_users">
+				<a onclick='javascript:location.replace("iteminout.html")'>In & Out Statistics</a>
+			</li>
+			<li class="icn_profile">
+				<a onclick='javascript:location.replace("itemstaytime.html")'>Stay Time Statistics</a>
+			</li>
+			<li class="icn_settings">
+				<a onclick='javascript:location.replace("itemstaynumber.html")'>Stay Number Statistics</a>
+			</li>
+			<li class="icn_virtualequ">
+				<a onclick='javascript:location.replace("passangerflowmanage.html")'>Entrance Management</a>
+			</li>
+		</ul>
+		<h3>
+			Customer Information
+		</h3>
+            <ul class="toggle">			
+                <li class="icn_add_user">
+                    <a onclick='javascript:location.replace("userinfo.html")'>Personal Information</a>
+                </li>
+                <li class="icn_video">
+                    <a onclick='javascript:location.replace("equipmentinfo.html")'>Equipment Information</a>
+                </li>
+                <li class="icn_categories">
+                    <a onclick='javascript:location.replace("usersalesinfo.html")'>Sales Information</a>
+                </li>
+            </ul>
+		<footer>
+		<hr />
+		</footer>
+		</aside>
+		<!-- end of sidebar -->
+
+		<section id="main" class="column">
+
+
+		<article class="module width_full" id="listarticle">
+		<header>
+		<h3 class="tabs_involved">
+			Personal Information
+		</h3>
+		</header>
+		<div class="tab_content bulk-actions-txt">
+			<div id="CustDetailTable_Shadow" class="shadow">
+				<img src="../images/load.gif" />
+			</div>
+			<div id="CustDetailTable_Error" class="error">
+				<img src="../images/error.png" />
+			</div>&nbsp
+			<table id="CustDetailTable" class="tablesorter" cellspacing="0">
+				<colgroup>
+					<col class="tdwidth5"></col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="text-right">
+							Username：
+						</td>
+						<td>
+							<!-- 隐藏的Guid -->
+							<input name="custGuid" id="custGuid" type="hidden" value=""
+								disabled />
+							<input name="custName" id="custName"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" value="" readonly="readonly" />
+						</td>
+					</tr>
+                    <tr>
+                        <td class="text-right">Password：
+                        </td>
+                        <td>
+                            <input name="custPwd" id="custPwd" class="text-input inputsize2"
+                                type="password" maxlength="50" class="input_txt_col" value=""
+                                readonly="readonly" disabled />
+                            <div class="bulk-actions-btn align-right">
+                                <a id="BtnModify" class="alt_btn" onclick="ModifyPwd();">Modify Password</a>
+                            </div>
+                        </td>
+                    </tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							New Password：
+
+						</td>
+						<td>
+							<input name="newCustPwd" id="newCustPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+					<tr style="display: none;">
+						<td class="text-right">
+
+							Confirm Password：
+
+						</td>
+						<td>
+
+							<input name="newCustPwd" id="confirmCustPwd"
+								class="text-input inputsize2" type="password" maxlength="50"
+								class="input_txt_col" value="" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Currency Type：
+						</td>
+						<td>
+						     <span style="position:relative;">
+                                <select id="select" style="width:120px;" disabled="disabled" onchange="datachange();">
+                                   <option value="USD">USD</option>
+								   <option value="EUR">EUR</option>
+                                   <option value="CNY">CNY</option>
+								   <option value="HKD">HKD</option>
+                                   <option value="JPY">JPY</option>
+								   <option value="AUD">AUD</option>
+								   <option value="CAD">CAD</option>
+								   <option value="GBP">GBP</option>
+								   <option value="SGD">SGD</option>
+								   <option value="RUB">RUB</option>
+								   <option value="CHF">CHF</option>
+								   <option value="KRW">KRW</option>
+								   <option value="CHF">CHF</option>
+								   <option value="NZD">NZD</option>
+								   <option value="MXN">MXN</option>
+								   <option value="CLP">CLP</option>
+								   <option value="BRL">BRL</option>
+                                </select>
+                                <input id="currencytype" disabled="disabled" name="currencytype" value="1.0"  style="color:#000000;position:absolute;width:98px;height:18px;left:0px;top:-5px;
+								border-bottom:0px;border-right:0px;border-left:0px;border-top:0px;">
+                             </span> 
+							<!-- <input name="currencytype" id="currencytype"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" value="" /> -->
+							<div class="bulk-actions-btn align-right"  id="CancelCurrencytypeBtn" style="display:none;" >
+                                <a  class="alt_btn" onclick="currencytypecancel();">Cancel</a>
+                            </div>
+							<div class="bulk-actions-btn align-right">
+                                <a id="ModifyCurrencytypeBtn" class="alt_btn" onclick="ModifyCurrencyType();">Modify CurrencyType</a>
+                            </div>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Subordinated Item：
+						</td>
+						<td>
+							<select name="ownProject" id="ownProject" disabled
+								class="input_txt_col inputsize2" style="width:250px;">
+								<option value="-1">
+									--Please Select The Item--
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Director：
+						</td>
+						<td>
+							<input name="responsiblePerson" id="responsiblePerson"
+								class="text-input inputsize2" type="text" maxlength="50"
+								class="input_txt_col" value="highlight" readonly="readonly"
+								disabled />
+						</td>
+					</tr>
+                    <tr>
+                        <td class="text-right">Opening Time Setting：
+                        </td>
+                        <td>
+                            <span>Start Time:
+                            <input
+                                name="startTime" id="startTimeGap" type="text" disabled="disabled"
+                                onfocus="WdatePicker({lang:'en',readOnly:true,dateFmt:'HH:mm:00'})"
+                                style="width: 100px;" readonly="readonly" />
+                            </span>
+                            <span>End Time:
+                            <input
+                                name="endTime" id="endTimeGap" type="text" disabled="disabled"
+                                onfocus="WdatePicker({lang:'en',readOnly:true,dateFmt:'HH:mm:00'})"
+                                style="width: 100px;" readonly="readonly" />
+                            </span>
+                            <div class="bulk-actions-btn align-right">
+                                <a id="ModifyStartEndTimeBtn" class="alt_btn" onclick="ModifyStartEndTime();">Reset Opening Time</a>
+                            </div>
+                        </td>
+                    </tr>
+					<tr>
+						<td class="text-right">
+							Input Time：
+						</td>
+						<td colspan="3">
+							<input name="addTime" id="addTime" class="text-input inputsize2"
+								type="text" class="input_txt_col" maxlength="50"
+								onFocus="WdatePicker({lang:'en',readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{\'%y-%M-%d\'}'})"
+								readonly="readonly" disabled />
+						</td>
+					</tr>
+					<!-- <tr>
+						<td colspan="4" align="center">
+							<div id="wait_loading" style="padding: 50px 0 0 0;display:none;">
+								<div style="width: 103px;margin: 0 auto;"><img src="../images/load.gif"/></div>
+								<br></br>
+								<div style="width: 103px;margin: 0 auto;"><span>Uploading...</span></div>
+								<br></br>
+							</div>
+							<div style="text-align:left;position:relative;width:355px;">
+								 <input type='text' name='textfield' id='textfield' style="height:22px; border:1px solid #cdcdcd; width:180px;color:black;" />  
+								 <input type='button' style="height:24px; width:70px;background-color:#30B0C8;color:black;" value='Browse...' />
+								 <input type="file" name="file" style="position:absolute; top:0; left:0; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px" id="file" size="28" onchange="check(this)" />
+								 <input type="button" id="btnUpload" name="btnUpload" style="height:24px;background-color:#30B0C8;color:black;" value="Upload Logo" onclick="ajaxFileUpload();"/>
+							</div>
+						</td>
+					</tr> -->
+
+				</tbody>
+			</table>
+
+		</div>
+
+		</article>
+		<!-- end of content manager article -->
+
+		<div class="clear"></div>
+
+		<div class="spacer"></div>
+		</section>
+
+
+	</body>
+
+</html>

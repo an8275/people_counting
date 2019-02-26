@@ -1,0 +1,24 @@
+
+1. 编码规范
+
+全部采用utf-8编码
+
+前端: html,js,css(utf-8编码)->encodeURI()编码提交内容或者GET请求
+后端: python(unquote解码数据)
+
+2. 架构
+后端: lighttpd+python scgi+mysql
+数据通讯：JSON
+前端: html+js(Jquery)+css
+
+3. 安全相关
+3.1) login sha1 密码
+3.2) cookie 或者session机制
+3.3) session timeout机制
+3.4) 
+
+4. 性能问题
+4.1) 同时处理上万HTTP请求
+4.2) 数据类型，大数据量
+4.3）写入频繁
+4.4) 统计查询较少但是大数据量下反映要快

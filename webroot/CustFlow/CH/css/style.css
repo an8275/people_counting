@@ -1,0 +1,145 @@
+input[type="checkbox"] {
+	border: 0px;
+}
+
+textarea {
+	resize: none;
+}  /*限制textarea不可拉伸*/
+.error {
+	position: absolute;
+	z-index: 100;
+	text-align: center;
+	background: #eee;
+}  /*加载出错*/
+.hide {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: break-all;
+	table-layout: fixed;
+}  /*用于隐藏表格内过长数据*/
+.tablestyle {
+	border-collapse: collapse; /**表示表格的两边框合并为一条**/
+	table-layout: fixed !important;
+	word-wrap: break-word; /*浏览器不兼容**/
+	word-break: break-all;
+}
+
+.tbodystyle {
+	overflow: auto;
+}  /**/
+.shadow {
+	position: absolute;
+	z-index: 100;
+	text-align: center;
+	filter: alpha(opacity =                  
+		                                                         
+		                    70);
+	opacity: 0.7;
+	background: #eee;
+}  /*load遮罩*/
+.marginleft {
+	margin-left: 65%;
+}
+
+.marginleft2 {
+	margin-left: 10%;
+}
+
+.tdClickColor {
+	background-color: #f0f0f0;
+}
+
+.tdMouseOver {
+	color: #089ab0;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#pageCurrent,#PageCount {
+	color: #089ab0;
+	font-size: 12px;
+}
+
+#PageCtrl {
+	width: 100%;
+}
+
+/**
+解决在ie下字体变小的问题
+*/
+#PageCtrl a {
+	font-size: 12px;
+}
+
+.inputDisabled {
+	background: #f0f0f0 !important;
+	color: #999599 !important;
+}
+
+.checkbox {
+	border: 0 !important;
+}
+
+.clear {
+	clear: both;
+}
+
+.inputsize {
+	width: 90%;
+}
+
+.inputsizeall {
+	width: 100%;
+}
+
+.inputsize2 {
+	width: 40%;
+}
+
+.inputsize3 {
+	width: 50%;
+}
+
+.tdwidth1 {
+	width: 30%;
+}
+
+.tdwidth2 {
+	width: 25%;
+}
+
+.tdwidth3 {
+	width: 15%;
+}
+
+.tdwidth4 {
+	width: 10%;
+}
+
+.tdwidth5 {
+	width: 38%;
+}
+
+.tdwidth6 {
+	width: 20%;
+}
+
+.selectwidth {
+	width: 120px;
+}
+
+/*悬停提示*/
+.tempdiv {
+	position: absolute;
+	z-index: 100;
+}
+
+/*图表展示div*/
+.chartlist {
+	max-width: 100%;
+	min-width: 400px;
+	height: 400px;
+	margin: 0;
+	padding-right: 5px;
+}
